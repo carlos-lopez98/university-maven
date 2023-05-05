@@ -15,7 +15,12 @@ import com.solvd.university.models.universities.University;
 import java.util.ArrayList;
 import java.util.List;
 
-//Generates information for the Databases to use
+/*
+*
+* Generates initial values for testing purposes in main class
+*
+* */
+
 public final class Generate {
 
     private static final List<String> PublicUniversityNames = new ArrayList<>() {

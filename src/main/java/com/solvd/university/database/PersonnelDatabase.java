@@ -15,8 +15,11 @@ public class PersonnelDatabase {
     private List<Staff> personnel;
 
     //Initializes our database to be the personnel created from the generate university methods
+    //TODO refactor for re-usability
     public PersonnelDatabase(UniversityDatabase database) {
         int counter = 0;
+
+
         for (University university : database.getUniversityList()) {
             personnel.addAll(database.getUniversityList().get(counter).getPersonnel());
         }

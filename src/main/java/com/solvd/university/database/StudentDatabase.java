@@ -13,6 +13,7 @@ public class StudentDatabase {
     private Logger logger = LogManager.getLogger(Main.class);
     private List<Student> students;
 
+    //TODO refactor for re-usability
     public StudentDatabase(UniversityDatabase database){
         int counter = 0;
      /*   for(University university: database.getUniversityList()){

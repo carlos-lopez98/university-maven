@@ -22,6 +22,9 @@ public class UniversityDatabase {
     private List<University> universityList = new ArrayList<>();
 
     //TODO refactor for re-usability
+
+    public UniversityDatabase(){};
+
     public UniversityDatabase(List<University> universitiesAvailable) {
 
        this.universityList = universitiesAvailable;

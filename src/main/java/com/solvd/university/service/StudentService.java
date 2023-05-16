@@ -26,9 +26,8 @@ public class StudentService implements StudentNotification {
     }
 
     //Initializing our values to mess with
-    public StudentService(StudentDatabase studentDatabase, UniversityDatabase universityDatabase) {
-        this.universityDatabase = universityDatabase;
-        this.studentDatabase = studentDatabase;
+    public StudentService() {
+
     }
 
     public void enrollToUniversity(Student student, String universityEnrolling) {
@@ -88,5 +87,14 @@ public class StudentService implements StudentNotification {
     public void sendEmail(String studentEmail, String message) {
         logger.info("Email Sent");
         logger.info(message);
+    }
+
+
+    public void setUniversityDatabase(UniversityDatabase universityDatabase) {
+        this.universityDatabase = universityDatabase;
+    }
+
+    public void setStudentDatabase(StudentDatabase studentDatabase) {
+        this.studentDatabase = studentDatabase;
     }
 }

@@ -15,7 +15,10 @@ public class StudentDatabase {
     private List<Student> students;
 
     //TODO refactor for re-usability
-    public StudentDatabase(List<Student> students){
+    public StudentDatabase() {
+    }
+
+    public StudentDatabase(List<Student> students) {
         this.students = students;
 
     }
@@ -28,17 +31,17 @@ public class StudentDatabase {
         this.students = students;
     }
 
-    public void addStudent(Student student){
+    public void addStudent(Student student) {
         students.add(student);
         logger.info("Student was successfully added");
     }
 
     //TODO Remove student from UniversityDatabase
-    private void deleteByID(int studentId){
-        for(Student student: students){
-            if(student.getStudentId() == studentId){
+    private void deleteByID(int studentId) {
+        for (Student student : students) {
+            if (student.getStudentId() == studentId) {
                 students.remove(student);
-            }else {
+            } else {
                 throw new StudentNotFoundException("Student Id was not found in Student Database");
             }
         }

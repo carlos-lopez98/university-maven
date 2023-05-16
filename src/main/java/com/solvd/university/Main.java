@@ -20,12 +20,9 @@ public class Main {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
 
-
-
-
-    private static UniversityDatabase universityDatabase;
-    private static StudentDatabase studentDatabase;
-    private static StudentService studentService = new StudentService(studentDatabase, universityDatabase);
+    private static UniversityDatabase universityDatabase = new UniversityDatabase();
+    private static StudentDatabase studentDatabase = new StudentDatabase();
+    private static StudentService studentService = new StudentService();
 
     public static void main(String[] args) {
 
@@ -34,6 +31,10 @@ public class Main {
 
         //Pulls all students from the university database
         studentDatabase.setStudents(getStudents());
+
+        //Giving our service databases to access
+        studentService.setStudentDatabase(studentDatabase);
+        studentService.setUniversityDatabase(universityDatabase);
 
         //Emulates Student receiving information about what university they qualify for
         logger.info("********Hello, Welcome to our University system********");
@@ -71,7 +72,7 @@ public class Main {
 
     private static List<Student> getStudents() {
         List<Student> students = new ArrayList<>();
-        for(University university: universityDatabase.getUniversityList()){
+        for (University university : universityDatabase.getUniversityList()) {
             students.addAll(university.getStudents());
         }
         return students;
@@ -79,7 +80,7 @@ public class Main {
 
     private static List<University> getUniversities() {
         List<University> universityList = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             universityList.add(Generate.generatePublicUni(i));
             universityList.add(Generate.generatePrivateUni(i));
         }
@@ -94,24 +95,24 @@ public class Main {
         }
     }
 
-    private static void printQualifiedSchools(Student student){
+    private static void printQualifiedSchools(Student student) {
 
         int counter = 1;
 
 
         for (University university : universityDatabase.getUniversityList()) {
 
-            if(university.getClass() == PrivateUniversity.class){
+            if (university.getClass() == PrivateUniversity.class) {
                 university = new PrivateUniversity(university.getUniversityName(), university.getCourses(),
                         university.getDepartments(), ((PrivateUniversity) university).isInState());
-                if(((PrivateUniversity) university).getEntryExamScoreNeeded() < EntryExamScore.calculateEntryExamScore(student)){
+                if (((PrivateUniversity) university).getEntryExamScoreNeeded() < EntryExamScore.calculateEntryExamScore(student)) {
                     logger.info(counter + ": " + university.getUniversityName());
                     counter++;
                 }
-            }else if(university.getClass() == PublicUniversity.class){
+            } else if (university.getClass() == PublicUniversity.class) {
                 university = new PublicUniversity(university.getUniversityName(), university.getCourses(),
                         university.getDepartments(), ((PublicUniversity) university).isInState());
-                if(((PublicUniversity) university).getEntryExamScoreRequirement() < EntryExamScore.calculateEntryExamScore(student)){
+                if (((PublicUniversity) university).getEntryExamScoreRequirement() < EntryExamScore.calculateEntryExamScore(student)) {
                     logger.info(counter + ": " + university.getUniversityName());
                     counter++;
                 }

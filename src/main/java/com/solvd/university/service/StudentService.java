@@ -4,12 +4,10 @@ import com.solvd.university.Main;
 import com.solvd.university.database.StudentDatabase;
 import com.solvd.university.database.UniversityDatabase;
 import com.solvd.university.exceptions.UniversityNotFoundException;
-import com.solvd.university.interfaces.PaymentProcessor;
 import com.solvd.university.interfaces.StudentNotification;
 import com.solvd.university.models.persons.Student;
 import com.solvd.university.models.universities.University;
 
-import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.List;

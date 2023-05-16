@@ -3,7 +3,6 @@ package com.solvd.university.database;
 import com.solvd.university.Main;
 import com.solvd.university.exceptions.StudentNotFoundException;
 import com.solvd.university.models.persons.Staff;
-import com.solvd.university.models.universities.University;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,18 +15,18 @@ public class PersonnelDatabase {
 
     //Initializes our database to be the personnel created from the generate university methods
     //TODO refactor for re-usability
-    public PersonnelDatabase(UniversityDatabase database) {
-        int counter = 0;
+    public PersonnelDatabase(List<Staff> personnel) {
 
+        this.personnel = personnel;
 
-        for (University university : database.getUniversityList()) {
-            personnel.addAll(database.getUniversityList().get(counter).getPersonnel());
-        }
+      /*  for (University university : database.getUniversityList()) {
+            personnel.addAll(university.getPersonnel());
+        }*/
     }
 
     private void addPersonnel(Staff person) {
         personnel.add(person);
-        logger.info("Student was successfully added");
+        logger.info("Staff person was successfully added");
     }
 
     //TODO Remove Staffer from UniversityDatabase

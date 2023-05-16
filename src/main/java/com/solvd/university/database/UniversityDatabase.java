@@ -18,16 +18,14 @@ import java.util.List;
 public class UniversityDatabase {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
-
     private List<University> universityList = new ArrayList<>();
 
-    //TODO refactor for re-usability
-
-    public UniversityDatabase(){};
+    public UniversityDatabase() {
+    };
 
     public UniversityDatabase(List<University> universitiesAvailable) {
 
-       this.universityList = universitiesAvailable;
+        this.universityList = universitiesAvailable;
     }
 
     public void save(University university) {

@@ -19,7 +19,7 @@ import java.util.List;
  *
  * Generates initial values for testing purposes in main class
  *
- * */
+ */
 
 public final class Generate {
 
@@ -31,7 +31,7 @@ public final class Generate {
         University university = new PublicUniversity(uniName, generateCourseList(), generateDepartmentList(),
                 SchoolFlag.returnRandomFlag().getFlag());
 
-        university.setStudents(generatePublicUniStudentList());
+        university.setStudents(generatePublicUniStudentList(uniName));
         return university;
     }
 
@@ -43,20 +43,22 @@ public final class Generate {
         University university = new PublicUniversity(uniName, generateCourseList(), generateDepartmentList(),
                 SchoolFlag.returnRandomFlag().getFlag());
 
-        university.setStudents(generatePrivateUniStudentList());
+        university.setStudents(generatePrivateUniStudentList(uniName));
 
         return university;
     }
 
-    public static List<Student> generatePrivateUniStudentList() {
+    //TODO Refactor to provide correct ID per school, instead of per student, IDs should correspond to school
+    public static List<Student> generatePrivateUniStudentList(String privateUniToAssign) {
 
         List<Student> students = new ArrayList<>();
+        String uniAssigned = privateUniToAssign;
 
         for (int i = 0; i < 5; i++) {
             int randoIndex = (int) Math.random() * FirstNames.values().length;
             String studentFirstName = FirstNames.values()[randoIndex].toString();
-            String lastName = LastNames.get(randoIndex);
-            String uniAssigned = PrivateUniversityNames.get(randoIndex);
+            String lastName = LastNames.values()[randoIndex].toString();
+
             Student student = new Student(studentFirstName, lastName, uniAssigned);
 
             student.setStudentId(i);
@@ -66,20 +68,19 @@ public final class Generate {
         return students;
     }
 
-    public static List<Student> generatePublicUniStudentList() {
+    //TODO Refactor to provide correct ID per school, instead of per student, IDs should correspond to school
+    public static List<Student> generatePublicUniStudentList(String publicUniToAssign) {
 
         List<Student> students = new ArrayList<>();
+        String uniAssigned = publicUniToAssign;
 
         for (int i = 0; i < 5; i++) {
-            int randoIndex = (int) Math.random() * FirstNames.size();
-            String studentFirstName = FirstNames.get(randoIndex);
-            String lastName = LastNames.get(randoIndex);
-            String uniAssigned = PublicUniversityNames.get(randoIndex);
+            int randoIndex = (int) Math.random() * FirstNames.values().length;
+            String studentFirstName = FirstNames.values()[randoIndex].toString();
+            String lastName = LastNames.values()[randoIndex].toString();
 
             Student student = new Student(studentFirstName, lastName, uniAssigned);
-
             student.setStudentId(i);
-
             students.add(student);
         }
         return students;

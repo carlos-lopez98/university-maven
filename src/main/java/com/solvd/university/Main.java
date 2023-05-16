@@ -16,6 +16,15 @@ public class Main {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
 
+    //Generate Universities for the Database
+    Generate.
+
+
+
+
+
+
+
     private static UniversityDatabase universityDatabase = new UniversityDatabase();
     private static StudentDatabase studentDatabase = new StudentDatabase(universityDatabase);
     private static StudentService studentService = new StudentService(studentDatabase, universityDatabase);
@@ -66,8 +75,12 @@ public class Main {
     }
 
     private static void printQualifiedSchools(Student student){
+
         int counter = 1;
+
+
         for (University university : universityDatabase.getUniversityList()) {
+
             if(university.getClass() == PrivateUniversity.class){
                 university = new PrivateUniversity(university.getUniversityName(), university.getCourses(),
                         university.getDepartments(), ((PrivateUniversity) university).isInState());

@@ -29,7 +29,7 @@ public class StudentService {
             throw new NullPointerException("The information entered is empty");
         }
 
-        //Jdk Interface
+        //Jdk Interface - Stream API
        List<String> universityNames = universityDatabase
                .getUniversityList()
                .stream()

@@ -28,7 +28,6 @@ public class PersonnelDatabase {
     private void addPersonnel(Staff person) {
         personnel.add(person);
         logger.info("Student was successfully added");
-        System.out.println("Student was succesfully added");
     }
 
     //TODO Remove Staffer from UniversityDatabase

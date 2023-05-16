@@ -22,15 +22,9 @@ public class UniversityDatabase {
     private List<University> universityList = new ArrayList<>();
 
     //TODO refactor for re-usability
-    public UniversityDatabase() {
+    public UniversityDatabase(List<University> universitiesAvailable) {
 
-        for (int i = 0; i < 5; i++) {
-            universityList.add(Generate.generatePublicUni(i));
-        }
-
-        for (int j = 0; j < 5; j++) {
-            universityList.add(Generate.generatePrivateUni(j));
-        }
+       this.universityList = universitiesAvailable;
     }
 
     public void save(University university) {

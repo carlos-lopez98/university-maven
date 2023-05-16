@@ -7,6 +7,7 @@ import com.solvd.university.models.persons.Student;
 import com.solvd.university.models.universities.University;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 public class StudentService {
@@ -21,11 +22,14 @@ public class StudentService {
     }
 
     public void enrollToUniversity(Student student, String universityEnrolling){
-        //Null Check
-        if(student == null || universityEnrolling == null){
+        //Null Check -- Using JDK Interface
+        BiPredicate<Student, String> nullCheck = (stu, str) -> str == null || stu == null;
+
+        if(nullCheck.test(student, universityEnrolling)){
             throw new NullPointerException("The information entered is empty");
         }
 
+        //Jdk Interface
        List<String> universityNames = universityDatabase
                .getUniversityList()
                .stream()

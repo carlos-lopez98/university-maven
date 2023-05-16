@@ -1,4 +1,4 @@
-package com.solvd.university;
+package com.solvd.university.generation;
 
 import com.solvd.university.models.courses.Calculus;
 import com.solvd.university.models.courses.Chemistry;
@@ -16,66 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-*
-* Generates initial values for testing purposes in main class
-*
-* */
+ *
+ * Generates initial values for testing purposes in main class
+ *
+ * */
 
 public final class Generate {
 
-    private static final List<String> PublicUniversityNames = new ArrayList<>() {
-        {
-            add("Cal State Long Beach");
-            add("Cal State San Diego");
-            add("Cal State San Francisco");
-            add("Cal State Fresno");
-            add("CalTech");
-        }
-    };
-
-    private static final List<String> PrivateUniversityNames = new ArrayList<>() {
-        {
-            add("Stanford");
-            add("UCLA");
-            add("University of the Pacific");
-            add("USC");
-            add("Santa Clara University");
-        }
-    };
-
-    private static final List<Boolean> InStateOrOutOfState = new ArrayList<Boolean>() {
-        {
-            add(false);
-            add(true);
-        }
-    };
-
-    private static final List<String> FirstNames = new ArrayList<>() {
-        {
-            add("John");
-            add("Michelle");
-            add("Gerald");
-            add("Carlos");
-            add("Mary");
-        }
-    };
-    
-    private static final List<String> LastNames = new ArrayList<>() {
-        {
-            add("White");
-            add("Smith");
-            add("Doe");
-            add("Prior");
-            add("Felt");
-        }
-    };
-
     //Generates Random Public School
     public static University generatePublicUni(int i) {
-        String uniName = PublicUniversityNames.get(i);
+
+        String uniName = PublicUniNames.values()[i].getSchoolName();
 
         University university = new PublicUniversity(uniName, generateCourseList(), generateDepartmentList(),
-                InStateOrOutOfState.get((int) Math.random() * InStateOrOutOfState.size()));
+                SchoolFlag.returnRandomFlag().getFlag());
 
         university.setStudents(generatePublicUniStudentList());
         return university;
@@ -84,10 +38,10 @@ public final class Generate {
     //Generates Random Private School
     public static University generatePrivateUni(int j) {
 
-        String uniName = PrivateUniversityNames.get(j);
+        String uniName = PrivateUniNames.values()[j].getSchoolName();
 
         University university = new PublicUniversity(uniName, generateCourseList(), generateDepartmentList(),
-                InStateOrOutOfState.get((int) Math.random() * InStateOrOutOfState.size()));
+                SchoolFlag.returnRandomFlag().getFlag());
 
         university.setStudents(generatePrivateUniStudentList());
 
@@ -99,8 +53,8 @@ public final class Generate {
         List<Student> students = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
-            int randoIndex = (int) Math.random() * FirstNames.size();
-            String studentFirstName = FirstNames.get(randoIndex);
+            int randoIndex = (int) Math.random() * FirstNames.values().length;
+            String studentFirstName = FirstNames.values()[randoIndex].toString();
             String lastName = LastNames.get(randoIndex);
             String uniAssigned = PrivateUniversityNames.get(randoIndex);
             Student student = new Student(studentFirstName, lastName, uniAssigned);

@@ -1,6 +1,6 @@
 package com.solvd.university.database;
 
-import com.solvd.university.Generate;
+import com.solvd.university.generation.Generate;
 import com.solvd.university.Main;
 import com.solvd.university.exceptions.CourseNotFoundException;
 import com.solvd.university.exceptions.PersonnelNotFoundException;
@@ -23,6 +23,7 @@ public class UniversityDatabase {
 
     //TODO refactor for re-usability
     public UniversityDatabase() {
+
         for (int i = 0; i < 5; i++) {
             universityList.add(Generate.generatePublicUni(i));
         }
@@ -50,7 +51,6 @@ public class UniversityDatabase {
                 logger.info("Exception message = " + e);
             }
         }
-
 
     }
 

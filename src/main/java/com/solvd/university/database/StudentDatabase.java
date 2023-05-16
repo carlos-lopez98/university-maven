@@ -3,6 +3,7 @@ package com.solvd.university.database;
 import com.solvd.university.Main;
 import com.solvd.university.exceptions.StudentNotFoundException;
 import com.solvd.university.models.persons.Student;
+import com.solvd.university.models.universities.University;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,13 +15,18 @@ public class StudentDatabase {
     private List<Student> students;
 
     //TODO refactor for re-usability
-    public StudentDatabase(UniversityDatabase database){
-        int counter = 0;
-     /*   for(University university: database.getUniversityList()){
-            students.addAll(database.getUniversityList().get(counter).getStudents());
-        }*/
+    public StudentDatabase(List<Student> students){
+        this.students = students;
+
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 
     public void addStudent(Student student){
         students.add(student);

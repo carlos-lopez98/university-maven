@@ -24,13 +24,16 @@ public class Main {
 
 
     private static UniversityDatabase universityDatabase;
-    private static StudentDatabase studentDatabase = new StudentDatabase(universityDatabase);
+    private static StudentDatabase studentDatabase;
     private static StudentService studentService = new StudentService(studentDatabase, universityDatabase);
 
     public static void main(String[] args) {
 
         //Generate Ten Universities for the Database
         universityDatabase.setUniversityList(getUniversities());
+
+        //Pulls all students from the university database
+        studentDatabase.setStudents(getStudents());
 
         //Emulates Student receiving information about what university they qualify for
         logger.info("********Hello, Welcome to our University system********");
@@ -64,6 +67,14 @@ public class Main {
         //Emulates Student Asking for Courses available by University
         logger.info(String.valueOf(universityDatabase.getAllCourses("Stanford")));
 
+    }
+
+    private static List<Student> getStudents() {
+        List<Student> students = new ArrayList<>();
+        for(University university: universityDatabase.getUniversityList()){
+            students.addAll(university.getStudents());
+        }
+        return students;
     }
 
     private static List<University> getUniversities() {

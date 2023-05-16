@@ -7,6 +7,8 @@ public abstract class Person {
     private String dateOfBirth;
     private String address;
 
+    private String email;
+
     private String uniAssigned;
 
     Person(String firstName, String lastName, String uniAssigned) {
@@ -53,5 +55,13 @@ public abstract class Person {
 
     public void setUniAssigned(String uniAssigned) {
         this.uniAssigned = uniAssigned;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

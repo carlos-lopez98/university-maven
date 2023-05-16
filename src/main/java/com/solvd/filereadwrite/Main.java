@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
+//TODO OUTPUT to an OUTPUT.txt - change output formatting
 public class Main {
 
     public static void main(String[] args){

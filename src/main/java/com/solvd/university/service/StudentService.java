@@ -4,6 +4,7 @@ import com.solvd.university.Main;
 import com.solvd.university.database.StudentDatabase;
 import com.solvd.university.database.UniversityDatabase;
 import com.solvd.university.exceptions.UniversityNotFoundException;
+import com.solvd.university.interfaces.PaymentProcessor;
 import com.solvd.university.interfaces.StudentNotification;
 import com.solvd.university.models.persons.Student;
 import com.solvd.university.models.universities.University;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
-public class StudentService implements StudentNotification {
+public class StudentService {
 
     private UniversityDatabase universityDatabase;
     private StudentDatabase studentDatabase;
@@ -37,6 +38,17 @@ public class StudentService implements StudentNotification {
         if (nullCheck.test(student, universityEnrolling)) {
             throw new NullPointerException("The information entered is empty");
         }
+
+        //Sending Notification email using functional interface
+        if(student.getEmail() != null){
+            StudentNotification notification = (studentEmail, message) -> {
+                logger.info("Email sent to " + studentEmail);
+                logger.info(message);
+            };
+
+            notification.sendEmail(student.getEmail(), "Student has been enrolled to " + universityEnrolling);
+        }
+
 
         //Jdk Interface - Stream API
         List<String> universityNames = universityDatabase
@@ -63,7 +75,7 @@ public class StudentService implements StudentNotification {
 
         //If student has an email in system send them an enrollment notification
         if (student.getEmail() != null) {
-            sendEmail(student.getEmail(), "You have enrolled in " + universityEnrolling);
+
         }
 
     }
@@ -82,14 +94,6 @@ public class StudentService implements StudentNotification {
 
     }
 
-
-    @Override
-    public void sendEmail(String studentEmail, String message) {
-        logger.info("Email Sent");
-        logger.info(message);
-    }
-
-
     public void setUniversityDatabase(UniversityDatabase universityDatabase) {
         this.universityDatabase = universityDatabase;
     }
@@ -97,4 +101,5 @@ public class StudentService implements StudentNotification {
     public void setStudentDatabase(StudentDatabase studentDatabase) {
         this.studentDatabase = studentDatabase;
     }
+
 }

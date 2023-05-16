@@ -24,7 +24,6 @@ public class StudentService {
         logger = LogManager.getLogger(Main.class);
     }
 
-    //Initializing our values to mess with
     public StudentService() {
 
     }

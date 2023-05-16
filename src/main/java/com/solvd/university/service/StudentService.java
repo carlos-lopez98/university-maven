@@ -39,16 +39,6 @@ public class StudentService {
             throw new NullPointerException("The information entered is empty");
         }
 
-        //Sending Notification email using functional interface
-        if(student.getEmail() != null){
-            StudentNotification notification = (studentEmail, message) -> {
-                logger.info("Email sent to " + studentEmail);
-                logger.info(message);
-            };
-
-            notification.sendEmail(student.getEmail(), "Student has been enrolled to " + universityEnrolling);
-        }
-
 
         //Jdk Interface - Stream API
         List<String> universityNames = universityDatabase
@@ -72,10 +62,14 @@ public class StudentService {
                         }
                 );
 
+        //Sending Notification email using functional interface
+        if(student.getEmail() != null){
+            StudentNotification notification = (studentEmail, message) -> {
+                logger.info("Email sent to " + studentEmail);
+                logger.info(message);
+            };
 
-        //If student has an email in system send them an enrollment notification
-        if (student.getEmail() != null) {
-
+            notification.sendEmail(student.getEmail(), "Student has been enrolled to " + universityEnrolling);
         }
 
     }

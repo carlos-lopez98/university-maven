@@ -2,6 +2,7 @@ package com.solvd.university;
 
 import com.solvd.university.database.StudentDatabase;
 import com.solvd.university.database.UniversityDatabase;
+import com.solvd.university.generation.Generate;
 import com.solvd.university.models.EntryExamScore;
 import com.solvd.university.models.persons.Student;
 import com.solvd.university.models.universities.PrivateUniversity;
@@ -11,25 +12,25 @@ import com.solvd.university.service.StudentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Main {
 
     private static final Logger logger = LogManager.getLogger(Main.class);
 
-    //Generate Universities for the Database
-    Generate.
 
 
 
-
-
-
-
-    private static UniversityDatabase universityDatabase = new UniversityDatabase();
+    private static UniversityDatabase universityDatabase;
     private static StudentDatabase studentDatabase = new StudentDatabase(universityDatabase);
     private static StudentService studentService = new StudentService(studentDatabase, universityDatabase);
 
     public static void main(String[] args) {
+
+        //Generate Ten Universities for the Database
+        universityDatabase.setUniversityList(getUniversities());
 
         //Emulates Student receiving information about what university they qualify for
         logger.info("********Hello, Welcome to our University system********");
@@ -63,8 +64,16 @@ public class Main {
         //Emulates Student Asking for Courses available by University
         logger.info(String.valueOf(universityDatabase.getAllCourses("Stanford")));
 
-    };
+    }
 
+    private static List<University> getUniversities() {
+        List<University> universityList = new ArrayList<>();
+        for(int i = 0; i < 5; i++){
+            universityList.add(Generate.generatePublicUni(i));
+            universityList.add(Generate.generatePrivateUni(i));
+        }
+        return universityList;
+    }
 
     private static void printUniversitiesInSystem() {
         int counter = 1;

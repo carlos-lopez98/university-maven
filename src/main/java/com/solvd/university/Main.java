@@ -88,11 +88,21 @@ public class Main {
     }
 
     private static void printUniversitiesInSystem() {
+/*
         int counter = 1;
-        for (University university : universityDatabase.getUniversityList()) {
+*/
+        //Refactor to return currect position values, currently puts 0 for everything
+        universityDatabase.getUniversityList().stream()
+                .map(University::getUniversityName)
+                .forEachOrdered((universityName) -> {
+                    int counter = universityDatabase.getUniversityList().indexOf(universityName) + 1;
+                    System.out.println(counter + ": " + universityName);
+                });
+
+     /*   for (University university : universityDatabase.getUniversityList()) {
             logger.info(counter + ": " + university.getUniversityName());
             counter++;
-        }
+        }*/
     }
 
     private static void printQualifiedSchools(Student student) {

@@ -25,7 +25,6 @@ public class StudentService {
     }
 
     public StudentService() {
-
     }
 
     public void enrollToUniversity(Student student, String universityEnrolling) {
@@ -35,7 +34,6 @@ public class StudentService {
         if (nullCheck.test(student, universityEnrolling)) {
             throw new NullPointerException("The information entered is empty");
         }
-
 
         //Jdk Interface - Stream API
         List<String> universityNames = universityDatabase

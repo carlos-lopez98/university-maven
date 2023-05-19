@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PersonnelDatabase {
 
@@ -14,14 +15,9 @@ public class PersonnelDatabase {
     private List<Staff> personnel;
 
     //Initializes our database to be the personnel created from the generate university methods
-    //TODO refactor for re-usability
     public PersonnelDatabase(List<Staff> personnel) {
 
         this.personnel = personnel;
-
-      /*  for (University university : database.getUniversityList()) {
-            personnel.addAll(university.getPersonnel());
-        }*/
     }
 
     private void addPersonnel(Staff person) {
@@ -29,14 +25,18 @@ public class PersonnelDatabase {
         logger.info("Staff person was successfully added");
     }
 
-    //TODO Remove Staffer from UniversityDatabase
     private void deleteByID(int staffId) {
-        for (Staff person : personnel) {
-            if (person.getStaffID() == staffId) {
-                personnel.remove(person);
-            } else {
-                throw new StudentNotFoundException("Staff Id was not found in Personnel Database");
-            }
+
+        boolean inStream = personnel.stream()
+                .anyMatch(person -> person.getStaffID() == staffId);
+
+        if(inStream){
+            this.personnel = personnel.stream()
+                    .filter((person) -> person.getStaffID() != staffId)
+                    .collect(Collectors.toList());
+        }else {
+            throw new StudentNotFoundException("Staff Id was not found in Personnel Database");
         }
+
     }
 }

@@ -1,6 +1,12 @@
 package com.solvd.university.models.clubs;
 
+import com.solvd.university.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class RoboticsClub extends Club implements Activity{
+
+    private Logger logger = LogManager.getLogger(Main.class);
 
     private String clubRobotName;
 
@@ -19,11 +25,11 @@ public class RoboticsClub extends Club implements Activity{
     //Abstract Override
     @Override
     public void displayActivity() {
-        System.out.println("We will be creating an underwater robot this semester");
+        logger.info("We will be creating an underwater robot this semester");
     }
 
     @Override
     public void doActivity() {
-        System.out.println("Robotics Club is now in session");
+        logger.info("Robotics Club is now in session");
     }
 }

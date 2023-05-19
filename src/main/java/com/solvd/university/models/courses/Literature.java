@@ -1,6 +1,12 @@
 package com.solvd.university.models.courses;
 
+import com.solvd.university.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Literature extends Course implements Enroll {
+
+    private Logger logger = LogManager.getLogger(Main.class);
 
     private String essaysNeeded;
 
@@ -11,12 +17,12 @@ public class Literature extends Course implements Enroll {
 
     @Override
     public void booksNeeded() {
-        System.out.println("College Language and Literature by Renee H. Shea");
+        logger.info("College Language and Literature by Renee H. Shea");
     }
 
     @Override
     public void addClassToSchedule() {
-        System.out.println("Literature has been added to your schedule");
+        logger.info("Literature has been added to your schedule");
     }
 
     public String getEssaysNeeded() {

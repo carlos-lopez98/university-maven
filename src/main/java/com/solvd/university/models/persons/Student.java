@@ -1,8 +1,13 @@
 package com.solvd.university.models.persons;
 
+import com.solvd.university.Main;
 import com.solvd.university.exceptions.InvalidScoreException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class Student extends Person implements Speak {
+
+    private Logger logger = LogManager.getLogger(Main.class);
 
     private int studentId;
     private int mathScore;
@@ -63,6 +68,6 @@ public final class Student extends Person implements Speak {
 
     @Override
     public void speak() {
-        System.out.println("Hello I'm a University Student");
+        logger.info("Hello I'm a University Student");
     }
 }

@@ -1,6 +1,12 @@
 package com.solvd.university.models.courses;
 
+import com.solvd.university.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Chemistry extends Course implements Enroll {
+
+    private Logger logger = LogManager.getLogger(Main.class);
 
     private String equipmentNeeded;
 
@@ -10,12 +16,12 @@ public class Chemistry extends Course implements Enroll {
 
     @Override
     public void booksNeeded() {
-        System.out.println("Chemistry by Steven Zumdahl");
+        logger.info("Chemistry by Steven Zumdahl");
     }
 
     @Override
     public void addClassToSchedule() {
-        System.out.println("Chemistry has been added to your schedule");
+        logger.info("Chemistry has been added to your schedule");
     }
 
     public String getEquipmentNeeded() {

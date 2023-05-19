@@ -1,6 +1,12 @@
 package com.solvd.university.models.persons;
 
+import com.solvd.university.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public final class Staff extends Person implements Speak {
+
+    private Logger logger = LogManager.getLogger(Main.class);
 
     private String dateHired;
     private String staffJob;
@@ -36,6 +42,6 @@ public final class Staff extends Person implements Speak {
 
     @Override
     public void speak() {
-        System.out.println("Hello I'm a University Staff");
+        logger.info("Hello I'm a University Staff");
     }
 }

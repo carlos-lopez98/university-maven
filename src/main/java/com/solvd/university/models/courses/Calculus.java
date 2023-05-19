@@ -1,12 +1,17 @@
 package com.solvd.university.models.courses;
 
+import com.solvd.university.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Calculus extends Course implements Enroll {
 
+    private Logger logger = LogManager.getLogger(Main.class);
     private String groupsAssigned;
 
     @Override
     public void booksNeeded() {
-        System.out.println("Calculus Volume 1 by Morris Kline");
+        logger.info("Calculus Volume 1 by Morris Kline");
     }
 
     public Calculus(String courseName) {
@@ -15,7 +20,7 @@ public class Calculus extends Course implements Enroll {
 
     @Override
     public void addClassToSchedule() {
-        System.out.println("Calculus has been added to your schedule");
+        logger.info("Calculus has been added to your schedule");
     }
 
     public String getGroupsAssigned() {

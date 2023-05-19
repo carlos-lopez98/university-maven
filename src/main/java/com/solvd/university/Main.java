@@ -54,7 +54,7 @@ public class Main {
         newAdmissionStudentOne.setWritingScore(90);
 
         logger.info("Your calculated entry score is " + EntryExamScore.calculateEntryExamScore(newAdmissionStudentOne));
-        System.out.println("Your qualifying schools are: ");
+        logger.info("Your qualifying schools are: ");
         printQualifiedSchools(newAdmissionStudentOne);
 
         logger.info("Please select from below options: ");
@@ -96,7 +96,7 @@ public class Main {
                 .map(University::getUniversityName)
                 .forEachOrdered((universityName) -> {
                     int counter = universityDatabase.getUniversityList().indexOf(universityName) + 1;
-                    System.out.println(counter + ": " + universityName);
+                    logger.info(counter + ": " + universityName);
                 });
 
      /*   for (University university : universityDatabase.getUniversityList()) {

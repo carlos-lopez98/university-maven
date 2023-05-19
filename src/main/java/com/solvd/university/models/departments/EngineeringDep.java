@@ -1,8 +1,14 @@
 package com.solvd.university.models.departments;
 
+import com.solvd.university.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.List;
 
 public class EngineeringDep extends Department implements Budget {
+
+    private Logger logger = LogManager.getLogger(Main.class);
 
     private List<String> buildingToolsAvailable;
 
@@ -12,12 +18,12 @@ public class EngineeringDep extends Department implements Budget {
 
     @Override
     public void seeDepartmentTutoringHours() {
-        System.out.println("Hours: M-F 5PM - 7PM");
+        logger.info("Hours: M-F 5PM - 7PM");
     }
 
     @Override
     public void showBudget() {
-        System.out.println("This semester's budget for the Engineering department is $350,000");
+        logger.info("This semester's budget for the Engineering department is $350,000");
     }
 
     public List<String> getBuildingToolsAvailable() {

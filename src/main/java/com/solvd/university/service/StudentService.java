@@ -9,6 +9,7 @@ import com.solvd.university.models.persons.Student;
 import com.solvd.university.models.universities.University;
 
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.function.BiPredicate;
@@ -18,11 +19,8 @@ public class StudentService {
 
     private UniversityDatabase universityDatabase;
     private StudentDatabase studentDatabase;
-    private static final org.apache.logging.log4j.Logger logger;
+    private Logger logger = LogManager.getLogger(Main.class);
 
-    static {
-        logger = LogManager.getLogger(Main.class);
-    }
 
     public StudentService() {
     }

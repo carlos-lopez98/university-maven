@@ -8,13 +8,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StudentDatabase {
 
     private Logger logger = LogManager.getLogger(Main.class);
     private List<Student> students;
 
-    //TODO refactor for re-usability
     public StudentDatabase() {
     }
 
@@ -36,14 +36,18 @@ public class StudentDatabase {
         logger.info("Student was successfully added");
     }
 
-    //TODO Remove student from UniversityDatabase
     private void deleteByID(int studentId) {
-        for (Student student : students) {
-            if (student.getStudentId() == studentId) {
-                students.remove(student);
-            } else {
-                throw new StudentNotFoundException("Student Id was not found in Student Database");
-            }
+
+        boolean inStream = students.stream()
+                .anyMatch(student -> student.getStudentId() == studentId);
+
+        if (inStream) {
+            this.students = students.stream()
+                    .filter(student -> student.getStudentId() != studentId)
+                    .collect(Collectors.toList());
+        } else {
+            throw new StudentNotFoundException("Student Id was not found in Student Database");
         }
+
     }
 }

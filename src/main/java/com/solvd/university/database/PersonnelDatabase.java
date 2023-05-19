@@ -26,17 +26,15 @@ public class PersonnelDatabase {
     }
 
     private void deleteByID(int staffId) {
-
         boolean inStream = personnel.stream()
                 .anyMatch(person -> person.getStaffID() == staffId);
 
-        if(inStream){
+        if (inStream) {
             this.personnel = personnel.stream()
                     .filter((person) -> person.getStaffID() != staffId)
                     .collect(Collectors.toList());
-        }else {
+        } else {
             throw new StudentNotFoundException("Staff Id was not found in Personnel Database");
         }
-
     }
 }

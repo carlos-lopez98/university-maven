@@ -42,7 +42,9 @@ public class Main {
             outputCount += key + ": " + uniqueWords.get(key) + "\n";
         }
 
+
         try {
+            //Will attempt to create a new file, if already there, it won't do anything
             outputFile.createNewFile();
 
             FileUtils.writeStringToFile(outputFile,

@@ -4,16 +4,20 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 //TODO OUTPUT to an OUTPUT.txt - change output formatting
 public class Main {
 
-    public static void main(String[] args){
-        File file = new File("..\\filereadwrite\\src\\main\\resources\\input.txt");
+    private static final Logger logger = LogManager.getLogger(Main.class);
 
-        Set<String> uniqueWords = new HashSet<>();
+    public static void main(String[] args){
+        File file = new File("src\\main\\resources\\input.txt");
+        File outputFile = new File("src\\main\\resources\\output.txt");
+
+        Map<String, Integer> uniqueWords = new HashMap<>();
 
         try {
             //Reads file to String using FileUtils
@@ -22,20 +26,29 @@ public class Main {
             //Converts String to array of Words
             String[] wordsNotUnique = fileToString.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
 
-            //Only stores unique words not duplicates
+
+            //Counts each word's occurrence and adds 1 if it's already in it
             for(String word: wordsNotUnique){
-                uniqueWords.add(word);
+                uniqueWords.merge(word, 1, Integer::sum);
             }
 
         } catch (IOException e) {
-            System.out.println("Unable to read file " + e);
+            logger.info("Unable to read file " + e);
             e.printStackTrace();
         }
 
+        String outputCount = "";
+        for(String key: uniqueWords.keySet()){
+            outputCount += key + ": " + uniqueWords.get(key) + "\n";
+        }
 
         try {
-            //Writes the count of unique words to the end of the file instead of creating a new one
-            FileUtils.writeStringToFile(file, "Unique count = " + uniqueWords.size(), StandardCharsets.UTF_8, true);
+            outputFile.createNewFile();
+
+            FileUtils.writeStringToFile(outputFile,
+                    outputCount,
+
+                    StandardCharsets.UTF_8, true);
         } catch (IOException e) {
             e.printStackTrace();
         }

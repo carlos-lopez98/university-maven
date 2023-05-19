@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -72,10 +73,13 @@ public class Main {
     }
 
     private static List<Student> getStudents() {
-        List<Student> students = new ArrayList<>();
-        for (University university : universityDatabase.getUniversityList()) {
-            students.addAll(university.getStudents());
-        }
+
+
+        List<Student> students = universityDatabase.getUniversityList().stream()
+                .flatMap(universities -> {
+                    return universities.getStudents().stream();
+                }).collect(Collectors.toList());
+
         return students;
     }
 
@@ -103,7 +107,6 @@ public class Main {
 
         int counter = 1;
 
-
         for (University university : universityDatabase.getUniversityList()) {
 
             if (university.getClass() == PrivateUniversity.class) {
@@ -124,8 +127,6 @@ public class Main {
         }
     }
 
-    //TODO
-    //Emulate Student Enrolling in class
     //Emulates Student adding Course to Curriculum
     //Emulate AdminService Retrieving all Personnel
     //Emulate Admin adding and removing courses from a university

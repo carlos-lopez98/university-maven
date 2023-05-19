@@ -14,6 +14,7 @@ import com.solvd.university.models.universities.University;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /*
  *
@@ -54,17 +55,20 @@ public final class Generate {
         List<Student> students = new ArrayList<>();
         String uniAssigned = privateUniToAssign;
 
-        for (int i = 0; i < 5; i++) {
-            int randoIndex = (int) Math.random() * FirstNames.values().length;
-            String studentFirstName = FirstNames.values()[randoIndex].toString();
-            String lastName = LastNames.values()[randoIndex].toString();
+        //For loop 1-5 alternative
+        //Basically for each i repeat until you hit 5 exclusive
+        IntStream.range(0, 5)
+                .forEachOrdered(i -> {
+                    int randoIndex = (int) (Math.random() * FirstNames.values().length);
+                    String studentFirstName = FirstNames.values()[randoIndex].toString();
+                    String lastName = LastNames.values()[randoIndex].toString();
 
-            Student student = new Student(studentFirstName, lastName, uniAssigned);
+                    Student student = new Student(studentFirstName, lastName, uniAssigned);
+                    student.setStudentId(i);
 
-            student.setStudentId(i);
+                    students.add(student);
+                });
 
-            students.add(student);
-        }
         return students;
     }
 
@@ -74,15 +78,18 @@ public final class Generate {
         List<Student> students = new ArrayList<>();
         String uniAssigned = publicUniToAssign;
 
-        for (int i = 0; i < 5; i++) {
-            int randoIndex = (int) Math.random() * FirstNames.values().length;
-            String studentFirstName = FirstNames.values()[randoIndex].toString();
-            String lastName = LastNames.values()[randoIndex].toString();
+        IntStream.range(0, 5)
+                .forEachOrdered(i -> {
+                    int randoIndex = (int) (Math.random() * FirstNames.values().length);
+                    String studentFirstName = FirstNames.values()[randoIndex].toString();
+                    String lastName = LastNames.values()[randoIndex].toString();
 
-            Student student = new Student(studentFirstName, lastName, uniAssigned);
-            student.setStudentId(i);
-            students.add(student);
-        }
+                    Student student = new Student(studentFirstName, lastName, uniAssigned);
+                    student.setStudentId(i);
+
+                    students.add(student);
+                });
+
         return students;
     }
 

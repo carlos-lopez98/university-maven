@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 
 public class Main {
@@ -79,30 +80,23 @@ public class Main {
     }
 
     private static List<University> getUniversities() {
+
         List<University> universityList = new ArrayList<>();
+
         for (int i = 0; i < 5; i++) {
             universityList.add(Generate.generatePublicUni(i));
             universityList.add(Generate.generatePrivateUni(i));
         }
+
         return universityList;
     }
 
     private static void printUniversitiesInSystem() {
-/*
-        int counter = 1;
-*/
-        //Refactor to return currect position values, currently puts 0 for everything
-        universityDatabase.getUniversityList().stream()
-                .map(University::getUniversityName)
-                .forEachOrdered((universityName) -> {
-                    int counter = universityDatabase.getUniversityList().indexOf(universityName) + 1;
-                    logger.info(counter + ": " + universityName);
-                });
 
-     /*   for (University university : universityDatabase.getUniversityList()) {
-            logger.info(counter + ": " + university.getUniversityName());
-            counter++;
-        }*/
+        IntStream.range(0, universityDatabase.getUniversityList().size())
+                .mapToObj(i -> (i + 1) + ": " + universityDatabase.getUniversityList().get(i).getUniversityName())
+                .forEachOrdered(System.out::println);
+
     }
 
     private static void printQualifiedSchools(Student student) {

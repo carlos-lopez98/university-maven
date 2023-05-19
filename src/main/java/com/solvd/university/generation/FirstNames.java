@@ -1,19 +1,18 @@
 package com.solvd.university.generation;
 
 public enum FirstNames {
-    JOHN,
-    MICHELLE,
-    GERALD,
-    CARLOS,
-    MARY;
+    JOHN("John"),
+    MICHELLE("Michelle"),
+    GERALD("Gerald"),
+    CARLOS("Carlos"),
+    MARY("Mary");
 
 
-    //Overrides the toString() method to return a capitalized version of the name
-    @Override
-    public String toString(){
-        String firstName = name();
-        String lowercase = firstName.substring(1).toLowerCase();
+    private final String firstName;
 
-        return firstName.charAt(0) + lowercase;
-    }
+    FirstNames(String firstName){this.firstName = firstName;}
+
+    public String getFirstName(){
+    return this.firstName;
+}
 }

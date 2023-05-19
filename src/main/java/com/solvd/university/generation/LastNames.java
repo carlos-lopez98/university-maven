@@ -2,18 +2,19 @@ package com.solvd.university.generation;
 
 public enum LastNames {
 
-    WHITE,
-    SMITH,
-    DOE,
-    PRIOR,
-    FELT;
+    WHITE("White"),
+    SMITH("Smith"),
+    DOE("Doe"),
+    PRIOR("Prior"),
+    FELT("Felt");
 
-    //Returns capitalized lastname
-    @Override
-    public String toString(){
-        String lastName = name();
-        String lowercase = lastName.substring(1).toLowerCase();
+    private final String lastName;
 
-        return lastName.charAt(0) + lowercase;
+    LastNames(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
     }
 }

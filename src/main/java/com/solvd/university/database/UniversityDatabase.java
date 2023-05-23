@@ -103,14 +103,15 @@ public class UniversityDatabase {
 
     public List<Staff> getAllStaffByUniversity(String universityName) {
 
-        for (University university : this.getUniversityList()) {
-            if (university.getUniversityName().equalsIgnoreCase(universityName)) {
-                return university.getPersonnel();
-            } else {
-                throw new PersonnelNotFoundException("Could not find any personnel pertaining to " + universityName);
-            }
+        List<Staff> personnel = universityList.stream()
+                .filter(u -> u.getUniversityName().equalsIgnoreCase(universityName))
+                .flatMap(u -> u.getPersonnel().stream())
+                .collect(Collectors.toList());
+
+        if(personnel.isEmpty()){
+            throw new PersonnelNotFoundException("Could not find any personnel pertaining to " + universityName);
         }
 
-        return null;
+        return personnel;
     }
 };

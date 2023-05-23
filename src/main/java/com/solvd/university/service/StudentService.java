@@ -68,7 +68,6 @@ public class StudentService {
     }
 
 
-    //TODO add a Generate Clubs to Generate Class
     public void enrollToClub(Student student, String universityName, String clubName) {
 
         List<University> universities = universityDatabase.getUniversityList();
@@ -89,4 +88,5 @@ public class StudentService {
         this.studentDatabase = studentDatabase;
     }
 
+    //TODO add a Generate Clubs to Generate Class
 }

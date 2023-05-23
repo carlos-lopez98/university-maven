@@ -49,7 +49,6 @@ public final class Generate {
         return university;
     }
 
-    //TODO Refactor to provide correct ID per school, instead of per student, IDs should correspond to school
     public static List<Student> generatePrivateUniStudentList(String privateUniToAssign) {
 
         List<Student> students = new ArrayList<>();
@@ -72,7 +71,6 @@ public final class Generate {
         return students;
     }
 
-    //TODO Refactor to provide correct ID per school, instead of per student, IDs should correspond to school
     public static List<Student> generatePublicUniStudentList(String publicUniToAssign) {
 
         List<Student> students = new ArrayList<>();
@@ -151,4 +149,8 @@ public final class Generate {
         return literature;
     }
 
+
+
+
+    //TODO Refactor to provide correct ID per school, instead of per student, IDs should correspond to school
 }

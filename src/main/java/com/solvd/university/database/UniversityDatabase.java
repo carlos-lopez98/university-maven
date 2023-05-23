@@ -1,6 +1,5 @@
 package com.solvd.university.database;
 
-import com.solvd.university.generation.Generate;
 import com.solvd.university.Main;
 import com.solvd.university.exceptions.CourseNotFoundException;
 import com.solvd.university.exceptions.PersonnelNotFoundException;
@@ -14,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UniversityDatabase {
 
@@ -34,8 +34,18 @@ public class UniversityDatabase {
 
     public void delete(University university) {
 
-        for (int j = 0; j < universityList.size(); j++) {
+         universityList.stream()
+                    .filter(u -> u.getUniversityName().equalsIgnoreCase(university.getUniversityName()))
+                    .findFirst()
+                    .ifPresentOrElse(
+                            u -> universityList.remove(u),
+                            () -> {
+                                throw new UniversityNotFoundException("University not found in Database to Delete");
+                            }
+                    );
 
+
+     /*   for (int j = 0; j < universityList.size(); j++) {
             try {
                 if (universityList.get(j).getUniversityName() == university.getUniversityName()) {
                     universityList.remove(universityList.get(j));
@@ -45,19 +55,29 @@ public class UniversityDatabase {
             } catch (UniversityNotFoundException e) {
                 logger.info("Exception message = " + e);
             }
-        }
-
+        }*/
     }
 
     public void addStudentToUniversityStudentList(Student student, String university) {
 
-        for (University uni : this.getUniversityList()) {
+
+        universityList.stream()
+                .filter(u -> u.getUniversityName().equalsIgnoreCase(university))
+                .findFirst()
+                .ifPresentOrElse(
+                        u -> u.getStudents().add(student),
+                        () -> {
+                            throw new UniversityNotFoundException("University not found, while trying to add student to that particular school");
+                        }
+                );
+
+     /*   for (University uni : this.getUniversityList()) {
             if (uni.getUniversityName().equalsIgnoreCase(university)) {
                 uni.getStudents().add(student);
             } else {
                 throw new UniversityNotFoundException("University not found, while trying to add student to a particular university");
             }
-        }
+        }*/
     }
 
     public List<University> getUniversityList() {
@@ -65,6 +85,7 @@ public class UniversityDatabase {
     }
 
     public University getByUniversityName(String name) {
+
         List<University> universities = this.getUniversityList();
 
         for (University university : universities) {
@@ -107,7 +128,6 @@ public class UniversityDatabase {
 
         for (University university : this.getUniversityList()) {
             if (university.getUniversityName().equalsIgnoreCase(universityName)) {
-
                 return university.getPersonnel();
             } else {
                 throw new PersonnelNotFoundException("Could not find any personnel pertaining to " + universityName);

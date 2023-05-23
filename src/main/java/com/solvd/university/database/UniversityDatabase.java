@@ -46,18 +46,6 @@ public class UniversityDatabase {
                         }
                 );
 
-
-     /*   for (int j = 0; j < universityList.size(); j++) {
-            try {
-                if (universityList.get(j).getUniversityName() == university.getUniversityName()) {
-                    universityList.remove(universityList.get(j));
-                } else {
-                    throw new UniversityNotFoundException("University Not Found In DataBase to Delete");
-                }
-            } catch (UniversityNotFoundException e) {
-                logger.info("Exception message = " + e);
-            }
-        }*/
     }
 
     public void addStudentToUniversityStudentList(Student student, String university) {
@@ -73,13 +61,6 @@ public class UniversityDatabase {
                         }
                 );
 
-     /*   for (University uni : this.getUniversityList()) {
-            if (uni.getUniversityName().equalsIgnoreCase(university)) {
-                uni.getStudents().add(student);
-            } else {
-                throw new UniversityNotFoundException("University not found, while trying to add student to a particular university");
-            }
-        }*/
     }
 
     public List<University> getUniversityList() {
@@ -102,23 +83,22 @@ public class UniversityDatabase {
     }
 
 
-    public Course getAllCourses(String universityName) {
+    public List<Course> getAllCourses(String universityName) {
 
         if (universityName == null) {
             throw new NullPointerException();
         }
 
-        List<Course> courses = null;
+        List<Course> courses = universityList.stream()
+                .filter(u -> u.getUniversityName().equalsIgnoreCase(universityName))
+                .flatMap(u -> u.getCourses().stream())
+                .collect(Collectors.toList());
 
-        for (University university : this.getUniversityList()) {
-            if (universityName.equalsIgnoreCase(universityName)) {
-                courses.addAll(university.getCourses());
-            } else {
-                throw new CourseNotFoundException("Could not find any courses for " + universityName);
-            }
+        if (courses.isEmpty()) {
+            throw new CourseNotFoundException("Could not find any courses for " + universityName);
         }
 
-        return (Course) courses;
+        return courses;
     }
 
     public List<Staff> getAllStaffByUniversity(String universityName) {

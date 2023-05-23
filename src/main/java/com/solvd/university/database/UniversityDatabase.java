@@ -21,7 +21,9 @@ public class UniversityDatabase {
     private List<University> universityList = new ArrayList<>();
 
     public UniversityDatabase() {
-    };
+    }
+
+    ;
 
     public UniversityDatabase(List<University> universitiesAvailable) {
 
@@ -34,15 +36,15 @@ public class UniversityDatabase {
 
     public void delete(University university) {
 
-         universityList.stream()
-                    .filter(u -> u.getUniversityName().equalsIgnoreCase(university.getUniversityName()))
-                    .findFirst()
-                    .ifPresentOrElse(
-                            u -> universityList.remove(u),
-                            () -> {
-                                throw new UniversityNotFoundException("University not found in Database to Delete");
-                            }
-                    );
+        universityList.stream()
+                .filter(u -> u.getUniversityName().equalsIgnoreCase(university.getUniversityName()))
+                .findFirst()
+                .ifPresentOrElse(
+                        u -> universityList.remove(u),
+                        () -> {
+                            throw new UniversityNotFoundException("University not found in Database to Delete");
+                        }
+                );
 
 
      /*   for (int j = 0; j < universityList.size(); j++) {
@@ -86,18 +88,13 @@ public class UniversityDatabase {
 
     public University getByUniversityName(String name) {
 
-        List<University> universities = this.getUniversityList();
+        University foundUni = universityList.stream()
+                .filter(u -> u.getUniversityName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new UniversityNotFoundException("No such university in database"));
 
-        for (University university : universities) {
+        return foundUni;
 
-            if (university.getUniversityName().equalsIgnoreCase(name)) {
-                return university;
-            } else {
-                throw new UniversityNotFoundException("No such university in database");
-            }
-        }
-
-        return null;
     }
 
     public void setUniversityList(List<University> universityList) {

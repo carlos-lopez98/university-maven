@@ -7,16 +7,16 @@ import java.util.Random;
 
 public class Connection implements Runnable {
 
-    private String connectionId;
+    private int connectionId;
     private boolean open;
     private static final Logger logger = LogManager.getLogger(Connection.class);
 
-    public Connection(String connectionId) {
+    public Connection(int connectionId) {
         this.connectionId = connectionId;
         open = true;
     }
 
-    public String getConnectionId() {
+    public int getConnectionId() {
         return connectionId;
     }
 

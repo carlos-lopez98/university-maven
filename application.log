@@ -1,0 +1,56 @@
+22:01:40.283 [main] INFO  com.solvd.connectionpool.Main - Thread 0 is waiting for a connection.
+22:01:40.286 [main] INFO  com.solvd.connectionpool.Main - Thread 1 is waiting for a connection.
+22:01:40.287 [main] INFO  com.solvd.connectionpool.Main - Thread 2 is waiting for a connection.
+22:01:40.287 [main] INFO  com.solvd.connectionpool.Main - Thread 3 is waiting for a connection.
+22:01:40.296 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Thread executing connection 1
+22:01:40.296 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Thread executing connection 3
+22:01:40.296 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Thread executing connection 4
+22:01:40.297 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 3
+22:01:40.297 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 1
+22:01:40.296 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Thread executing connection 2
+22:01:40.297 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 4
+22:01:40.298 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:01:40.298 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:01:40.298 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 2
+22:01:40.298 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:01:40.298 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:01:41.288 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Thread executing connection 6
+22:01:41.288 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Thread executing connection 7
+22:01:41.288 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Thread executing connection 5
+22:01:41.288 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 6
+22:01:41.288 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Thread executing connection 8
+22:01:41.288 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 5
+22:01:41.288 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Query result: false
+22:01:41.288 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 8
+22:01:41.288 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 7
+22:01:41.288 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:01:41.288 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:01:41.288 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Query result: false
+22:03:28.125 [main] INFO  com.solvd.connectionpool.Main - Thread 0 is waiting for a connection.
+22:03:28.128 [main] INFO  com.solvd.connectionpool.Main - Thread 1 is waiting for a connection.
+22:03:28.128 [main] INFO  com.solvd.connectionpool.Main - Thread 2 is waiting for a connection.
+22:03:28.128 [main] INFO  com.solvd.connectionpool.Main - Thread 3 is waiting for a connection.
+22:03:28.135 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Thread executing connection 1
+22:03:28.135 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Thread executing connection 2
+22:03:28.135 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Thread executing connection 4
+22:03:28.135 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Thread executing connection 3
+22:03:28.136 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 2
+22:03:28.136 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 4
+22:03:28.136 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 3
+22:03:28.136 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 1
+22:03:28.137 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Query result: false
+22:03:28.137 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:03:28.137 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Query result: false
+22:03:28.137 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Query result: false
+22:03:29.135 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Thread executing connection 5
+22:03:29.135 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Thread executing connection 6
+22:03:29.135 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Thread executing connection 8
+22:03:29.135 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Thread executing connection 7
+22:03:29.135 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 5
+22:03:29.135 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 6
+22:03:29.135 [pool-2-thread-3] INFO  com.solvd.connectionpool.Connection - Query result: false
+22:03:29.135 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 8
+22:03:29.135 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Executing query 'SELECT * FROM table' on connection 7
+22:03:29.135 [pool-2-thread-2] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:03:29.135 [pool-2-thread-4] INFO  com.solvd.connectionpool.Connection - Query result: true
+22:03:29.135 [pool-2-thread-1] INFO  com.solvd.connectionpool.Connection - Query result: true

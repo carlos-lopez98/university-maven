@@ -3,6 +3,9 @@ package com.solvd.university;
 import com.solvd.university.database.StudentDatabase;
 import com.solvd.university.database.UniversityDatabase;
 import com.solvd.university.generation.Generate;
+import com.solvd.university.generation.PrivateUniNames;
+import com.solvd.university.generation.PublicUniNames;
+import com.solvd.university.generation.SchoolFlag;
 import com.solvd.university.models.EntryExamScore;
 import com.solvd.university.models.persons.Student;
 import com.solvd.university.models.universities.PrivateUniversity;
@@ -12,6 +15,7 @@ import com.solvd.university.service.StudentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,11 +51,13 @@ public class Main {
         Student newAdmissionStudentOne = new Student("John", "Luke", null);
         Student newAdmissionStudentTwo = new Student("Mary", "Adams", null);
 
-        logger.info("Hi " + newAdmissionStudentOne.getFirstName() + "Please input your reading, writing and math scores");
+        logger.info("Hi " + newAdmissionStudentOne.getFirstName() + " Please input your reading, writing and math scores");
         logger.info("To see what schools you qaulify for");
 
         //Imitating Student Input
-        newAdmissionStudentOne.setMathScore(55);
+        logger.info("***EMULATED INPUT***");
+        logger.info("90, 98, 90");
+        newAdmissionStudentOne.setMathScore(90);
         newAdmissionStudentOne.setReadingScore(98);
         newAdmissionStudentOne.setWritingScore(90);
 
@@ -61,7 +67,6 @@ public class Main {
 
         logger.info("Please select from below options: ");
         logger.info("1: Browse Universities on file");
-
 
         //Emulate Student enrolling in University
         Student studentToEnroll = new Student("Bobby", "Lee", null);
@@ -83,7 +88,44 @@ public class Main {
         return students;
     }
 
+
+    //Uses Reflection API
     private static List<University> getUniversities() {
+        List<University> universityList = new ArrayList<>();
+
+        try {
+            Class<?> publicUniClass = Class.forName("com.solvd.university.models.universities.PublicUniversity");
+            Class<?> privateUniClass = Class.forName("com.solvd.university.models.universities.PrivateUniversity");
+
+            for (int i = 0; i < 5; i++) {
+                String publicUniName = PublicUniNames.values()[i % PublicUniNames.values().length].getSchoolName();
+                boolean publicUniFlag = SchoolFlag.returnRandomFlag().getFlag();
+
+                //Uses Reflection
+                University publicUni = (University) publicUniClass.getConstructor(String.class, List.class, List.class, boolean.class)
+                        .newInstance(publicUniName, Generate.generateCourseList(), Generate.generateDepartmentList(), publicUniFlag);
+                publicUni.setStudents(new ArrayList<Student>());
+                universityList.add(publicUni);
+
+                String privateUniName = PrivateUniNames.values()[i % PrivateUniNames.values().length].getSchoolName();
+                boolean privateUniFlag = SchoolFlag.returnRandomFlag().getFlag();
+
+                //Uses Reflection
+                University privateUni = (University) privateUniClass.getConstructor(String.class, List.class, List.class, boolean.class)
+                        .newInstance(privateUniName, Generate.generateCourseList(), Generate.generateDepartmentList(), privateUniFlag);
+
+                privateUni.setStudents(new ArrayList<Student>());
+
+                universityList.add(privateUni);
+            }
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return universityList;
+    }
+
+    /*private static List<University> getUniversities() {
 
         List<University> universityList = new ArrayList<>();
 
@@ -93,7 +135,7 @@ public class Main {
         }
 
         return universityList;
-    }
+    }*/
 
     private static void printUniversitiesInSystem() {
 
@@ -127,7 +169,4 @@ public class Main {
         }
     }
 
-    //Emulates Student adding Course to Curriculum
-    //Emulate AdminService Retrieving all Personnel
-    //Emulate Admin adding and removing courses from a university
 }

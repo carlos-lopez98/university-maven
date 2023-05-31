@@ -149,8 +149,4 @@ public final class Generate {
         return literature;
     }
 
-
-
-
-    //TODO Refactor to provide correct ID per school, instead of per student, IDs should correspond to school
 }

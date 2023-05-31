@@ -1,4 +1,5 @@
-/university.iml
-/.idea/
-/out/
-/target/
+university.iml
+.idea
+out
+target
+application.log
